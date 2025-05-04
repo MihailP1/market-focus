@@ -31,6 +31,11 @@ public class User implements UserDetails {
     private String password;
 
     @Override
+    public String getUsername() {
+        return this.email;
+    }
+    
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.emptyList(); // пока без ролей
     }
