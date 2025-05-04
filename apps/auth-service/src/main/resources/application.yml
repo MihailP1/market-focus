@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/market_focus_auth_db
+    username: market_focus_auth_admin
+    password: vP9#L2@xTf$8Rm
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  application:
+    name: auth-service
+
+# JWT settings for development (DO NOT use this secret in production!)
+jwt:
+  secret: N7z1qvJSe3Et1fvPIe5x/kX3fvhOceODWkSpLsDJImo=
+  expiration: 86400000 # 1 day in milliseconds
+
