@@ -14,7 +14,14 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/market" element={<MarketPage />} />
+        <Route
+          path="/market"
+          element={
+            <PrivateRoute>
+              <MarketPage />
+            </PrivateRoute>
+          }
+        />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />

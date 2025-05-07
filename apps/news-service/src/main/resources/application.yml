@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: news-service
+
+newsapi:
+  url: https://newsapi.org/v2/top-headlines
+  category: business
+  country: us
+  apiKey: ${NEWSAPI_KEY}
