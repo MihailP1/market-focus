@@ -7,3 +7,9 @@ newsapi:
   category: business
   country: us
   apiKey: ${NEWSAPI_KEY}
+
+kafka:
+  bootstrap:
+    servers: localhost:9092
+  topic:
+    news: news-updates
