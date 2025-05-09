@@ -13,6 +13,8 @@ spring:
         format_sql: true
   application:
     name: auth-service
+server:
+  port: 8081
 
 # JWT settings for development (DO NOT use this secret in production!)
 jwt:

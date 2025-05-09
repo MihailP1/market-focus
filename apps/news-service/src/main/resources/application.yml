@@ -13,3 +13,6 @@ kafka:
     servers: localhost:9092
   topic:
     news: news-updates
+
+server:
+  port: 8084
