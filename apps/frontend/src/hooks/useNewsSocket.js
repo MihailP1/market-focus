@@ -19,7 +19,7 @@ export default function useNewsSocket() {
       return;
     }
 
-    const socket = new SockJS(`http://localhost:8082/ws/market?token=${token}`);
+    const socket = new SockJS(`http://localhost:8080/ws/market?token=${token}`);
 
     const stompClient = new Client({
       webSocketFactory: () => socket,
