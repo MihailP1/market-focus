@@ -12,7 +12,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
-    // Создаем логгер
+    // Логгер для отслеживания
     private static final Logger logger = LoggerFactory.getLogger(WebSocketConfig.class);
 
     @Override
@@ -20,9 +20,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         // Логируем начало настройки брокера сообщений
         logger.info("Configuring WebSocket message broker");
 
-        // Enable simple message broker for /topic
+        // Включаем простое сообщение брокера для /topic
         config.enableSimpleBroker("/topic");
-        // Prefix for client-to-server messages
+        // Префикс для сообщений от клиента к серверу
         config.setApplicationDestinationPrefixes("/app");
 
         // Логируем завершение настройки
@@ -34,10 +34,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         // Логируем начало регистрации STOMP endpoints
         logger.info("Registering STOMP endpoints");
 
-        // Register STOMP endpoint with authentication via HandshakeInterceptor
+        // Регистрируем STOMP endpoint с поддержкой SockJS
         registry.addEndpoint("/ws/market")
                 .setAllowedOrigins("http://localhost:5173")  // Разрешаем CORS для фронтенда
-                .addInterceptors(new AuthHandshakeInterceptor())  // Добавляем HandshakeInterceptor для авторизации
+                // Убираем Interceptor для авторизации, так как это будет обрабатываться на уровне API Gateway
                 .withSockJS();
 
         // Логируем успешную регистрацию endpoint

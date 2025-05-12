@@ -15,6 +15,8 @@ public class RouteConfig {
                         .uri("lb://auth-service"))  // ← нижний регистр
                 .route("user_service", r -> r.path("/user-service/**")
                         .uri("lb://user-service"))
+                .route("websocket_service", r -> r.path("/websocket-service/**")
+                        .uri("lb://websocket-service"))
                 .build();
     }
 }
