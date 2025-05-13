@@ -14,10 +14,10 @@ eureka:
 
 auth-service:
   url: http://localhost:8081
-
 websocket-service:
   url: http://localhost:8082
-
+gateway-service:
+  url: http://localhost:8080
 server:
   port: 8080
 
