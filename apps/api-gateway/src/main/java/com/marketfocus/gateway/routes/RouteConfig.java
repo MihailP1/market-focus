@@ -12,9 +12,6 @@ public class RouteConfig {
     @Value("${auth-service.url}")
     private String authServiceUrl;
 
-    @Value("${user-service.url}")
-    private String userServiceUrl;
-
     @Value("${websocket-service.url}")
     private String websocketServiceUrl;
 
@@ -22,9 +19,9 @@ public class RouteConfig {
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("auth_service", r -> r.path("/auth/login")
-                        .uri(authServiceUrl + "/login"))
+                        .uri(authServiceUrl + "/auth/login"))
                 .route("auth_service", r -> r.path("/auth/register")
-                        .uri(authServiceUrl + "/register"))
+                        .uri(authServiceUrl + "/auth/register"))
                 .route("websocket_service", r -> r.path("/websocket-service/**")
                         .uri(websocketServiceUrl))
                 .build();

@@ -7,10 +7,6 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
 
 auth-service:
   url: http://localhost:8081
@@ -21,6 +17,10 @@ gateway-service:
 server:
   port: 8080
 
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.web.filter.CorsFilter: DEBUG
 # JWT settings for development (DO NOT use this secret in production!)
 jwt:
   secret: N7z1qvJSe3Et1fvPIe5x/kX3fvhOceODWkSpLsDJImo=
