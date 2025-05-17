@@ -3,17 +3,17 @@ spring:
     name: api-gateway
   cloud:
     gateway:
-      discovery:
-        locator:
+      httpclient:
+        websocket:
           enabled: true
-          lower-case-service-id: true
 
 auth-service:
   url: http://localhost:8081
 websocket-service:
-  url: http://localhost:8082
+  url: ws://localhost:8082
 gateway-service:
   url: http://localhost:8080
+
 server:
   port: 8080
 
@@ -21,8 +21,7 @@ logging:
   level:
     org.springframework.cloud.gateway: DEBUG
     org.springframework.web.filter.CorsFilter: DEBUG
-# JWT settings for development (DO NOT use this secret in production!)
+
 jwt:
   secret: N7z1qvJSe3Et1fvPIe5x/kX3fvhOceODWkSpLsDJImo=
-  expiration: 86400000 # 1 day in milliseconds
-
+  expiration: 86400000

@@ -18,11 +18,11 @@ public class RouteConfig {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("auth_service", r -> r.path("/auth/login")
+                .route("auth_login", r -> r.path("/auth/login")
                         .uri(authServiceUrl + "/auth/login"))
-                .route("auth_service", r -> r.path("/auth/register")
+                .route("auth_register", r -> r.path("/auth/register")
                         .uri(authServiceUrl + "/auth/register"))
-                .route("websocket_service", r -> r.path("/websocket-service/**")
+                .route("websocket_service", r -> r.path("/ws/market/**")
                         .uri(websocketServiceUrl))
                 .build();
     }
