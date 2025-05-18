@@ -10,19 +10,22 @@ public class KafkaConsumerService {
 
     private final SimpMessagingTemplate messagingTemplate;
 
-    // Внедрение SimpMessagingTemplate для отправки сообщений WebSocket клиентам
     @Autowired
     public KafkaConsumerService(SimpMessagingTemplate messagingTemplate) {
         this.messagingTemplate = messagingTemplate;
     }
 
-    // Обработчик сообщений из Kafka
+    // Слушаем топик с новостями
     @KafkaListener(topics = "news-topic", groupId = "websocket-service-group")
-    public void listen(String message) {
-        // Логируем полученное сообщение
+    public void listenNews(String message) {
         System.out.println("Received news from Kafka: " + message);
-
-        // Отправляем сообщение всем подключенным WebSocket клиентам
         messagingTemplate.convertAndSend("/topic/news", message);
+    }
+
+    // Слушаем топик с котировками рынка
+    @KafkaListener(topics = "quotes-topic", groupId = "websocket-service-group")
+    public void listenMarketQuotes(String message) {
+        System.out.println("Received market quote from Kafka: " + message);
+        messagingTemplate.convertAndSend("/topic/quotes", message);
     }
 }

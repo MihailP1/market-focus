@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: market-service
+
+finnhub:
+  url: https://finnhub.io/api/v1/quote
+  symbols:
+    - AAPL
+    - TSLA
+    - MSFT
+    - GOOGL
+    - AMZN
+    - NVDA
+    - META
+    - NFLX
+    - BRK.B
+    - JPM
+  apiKey: ${FINNHUB_API_KEY}
+
+kafka:
+  bootstrap:
+    servers: localhost:9092
+  topic:
+    quotes: market-quotes
+
+server:
+  port: 8085
