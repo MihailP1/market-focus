@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./apps/frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./apps/frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+
+  auth_postgres:
+    image: postgres:15-alpine
+    container_name: auth_postgres
+    environment:
+      POSTGRES_DB: market_focus_auth_db
+      POSTGRES_USER: market_focus_auth_admin
+      POSTGRES_PASSWORD: vP9#L2@xTf$8Rm
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  auth-service:
+    build:
+      context: ./apps/auth-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://auth_postgres:5432/market_focus_auth_db
+      - SPRING_DATASOURCE_USERNAME=market_focus_auth_admin
+      - SPRING_DATASOURCE_PASSWORD=vP9#L2@xTf$8Rm
+    depends_on:
+      - auth_postgres
+  api-gateway:
+    build:
+      context: ./apps/api-gateway
+    ports:
+      - "8080:8080"
+volumes:
+  pgdata:

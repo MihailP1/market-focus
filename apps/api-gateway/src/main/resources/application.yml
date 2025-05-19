@@ -8,11 +8,11 @@ spring:
           enabled: true
 
 auth-service:
-  url: http://localhost:8081
+  url: http://auth-service:8081
 websocket-service:
-  url: ws://localhost:8082
+  url: ws://websocket-service:8082
 gateway-service:
-  url: http://localhost:8080
+  url: http://api-gateway:8080
 
 server:
   port: 8080

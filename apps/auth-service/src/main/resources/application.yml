@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/market_focus_auth_db
-    username: market_focus_auth_admin
-    password: vP9#L2@xTf$8Rm
+    url: jdbc:postgresql://auth_postgres:5432/market_focus_auth_db
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -11,13 +11,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   application:
     name: auth-service
 server:
   port: 8081
 
-# JWT settings for development (DO NOT use this secret in production!)
 jwt:
   secret: N7z1qvJSe3Et1fvPIe5x/kX3fvhOceODWkSpLsDJImo=
-  expiration: 86400000 # 1 day in milliseconds
-
+  expiration: 86400000
