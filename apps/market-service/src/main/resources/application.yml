@@ -3,19 +3,31 @@ spring:
     name: market-service
 
 finnhub:
-  url: https://finnhub.io/api/v1/quote
+  url: https://finnhub.io/api/v1
   symbols:
     - AAPL
     - TSLA
     - MSFT
     - GOOGL
-    - AMZN
-    - NVDA
-    - META
-    - NFLX
-    - BRK.B
-    - JPM
   apiKey: ${FINNHUB_API_KEY}
+
+alphavantage:
+  url: https://www.alphavantage.co
+  symbols:
+    - AAPL
+    - MSFT
+    - GOOGL
+    - TSLA
+  apiKey: ${ALPHAVANTAGE_API_KEY}
+
+twelvedata:
+  url: https://api.twelvedata.com
+  symbols:
+    - AAPL
+    - MSFT
+    - GOOGL
+    - TSLA
+  apiKey: ${TWELVEDATA_API_KEY}
 
 kafka:
   bootstrap:

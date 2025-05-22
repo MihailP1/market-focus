@@ -7,7 +7,10 @@ export default defineConfig({
     global: 'window',
   },
   server: {
-    host: true,     // ← обязательно для Docker
-    port: 5173      // ← можно настроить под себя
+    host: true,
+    port: 5173,
+  },
+  optimizeDeps: {
+    include: ['chart.js'],
   },
 })

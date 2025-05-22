@@ -88,5 +88,7 @@ services:
       - kafka
     environment:
       - FINNHUB_API_KEY=${FINNHUB_API_KEY}
+      - ALPHAVANTAGE_API_KEY=${ALPHAVANTAGE_API_KEY}
+      - TWELVEDATA_API_KEY=${TWELVEDATA_API_KEY}
 volumes:
   pgdata:
