@@ -51,17 +51,25 @@ export default function useMarketSocket() {
               const parsed = JSON.parse(message.body);
               console.log("Received quotes from Kafka:", parsed);
 
-              // Если пришел массив котировок
-              if (Array.isArray(parsed)) {
-                const normalized = parsed.map(normalizeQuote);
-                setQuotes(normalized);
-              } else if (parsed && typeof parsed === "object") {
-                const normalizedQuote = normalizeQuote(parsed);
-                setQuotes(prev => [normalizedQuote, ...prev]);
+              if (parsed.symbol && Array.isArray(parsed.data)) {
+                const symbol = parsed.symbol;
+                const normalizedData = parsed.data.map(point => ({
+                  timestamp: new Date(point.timestamp).getTime(), // перевод в миллисекунды
+                  open: point.open,
+                  high: point.high,
+                  low: point.low,
+                  close: point.close,
+                  volume: point.volume,
+                }));
+
+                setQuotes(prev => ({
+                  ...prev,
+                  [symbol]: normalizedData, // заменяем старые данные на новые
+                }));
               }
             } catch (err) {
               console.error("Error parsing quotes message:", err);
-              setQuotes([message.body]);
+              setQuotes([]);
             }
           }
         });

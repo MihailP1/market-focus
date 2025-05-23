@@ -7,3 +7,80 @@ body {
   padding: 0;
   background-color: #f9f9f9;
 }
+
+.market-page {
+  display: flex;
+  gap: 32px;
+  padding: 16px;
+  height: 80vh;
+  background-color: #f9f9f9;
+
+  .news {
+    flex: 1 1 40%;
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
+    overflow-y: auto;  // скролл оставляем только здесь
+
+    h2 {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        border-bottom: 1px solid #ddd;
+        padding: 12px 0;
+
+        h3 {
+          margin: 0 0 4px 0;
+          font-weight: 600;
+          font-size: 1.125rem;
+        }
+
+        a {
+          color: #2563eb;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  .charts-container {
+    flex: 1 1 60%;
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+
+    .charts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+
+      .chart-wrapper {
+        flex: 1 1 calc(50% - 24px);
+        min-width: 300px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+      }
+    }
+  }
+}
+
+

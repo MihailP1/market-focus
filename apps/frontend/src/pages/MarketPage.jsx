@@ -28,93 +28,93 @@ export default function MarketPage() {
   const { news, quotes } = useNewsSocket();
 
   return (
-    <div className="p-4 grid grid-cols-2 gap-4">
-      {/* Новости */}
-      <div className="bg-white p-4 rounded shadow h-[80vh] overflow-y-auto">
-        <h2 className="text-xl font-bold mb-4">Финансовые новости</h2>
-        <ul className="space-y-4">
+    <div className="market-page">
+      {/* News */}
+      <div className="news">
+        <h2>Financial News</h2>
+        <ul>
           {news.length > 0 ? (
             news.map((newsItem, index) => (
-              <li key={index} className="border-b pb-4">
-                <h3 className="font-semibold text-lg">{newsItem.title}</h3>
+              <li key={index}>
+                <h3>{newsItem.title}</h3>
                 <a
                   href={newsItem.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline"
                 >
-                  Читать статью
+                  Read Article
                 </a>
               </li>
             ))
           ) : (
-            <li className="text-center">Нет доступных новостей</li>
+            <li>No news available</li>
           )}
         </ul>
       </div>
 
-      {/* Котировки и графики */}
-{/*       <div className="bg-white p-4 rounded shadow h-[80vh] overflow-y-auto"> */}
-{/*         <h2 className="text-xl font-bold mb-4">Котировки</h2> */}
+      {/* Quotes and charts */}
+      <div className="charts-container">
+        <h2>Quotes</h2>
+        <div className="charts">
+          {Object.keys(quotes).length > 0 ? (
+            Object.entries(quotes).map(([symbol, data]) => {
+              const sortedData = [...data].sort(
+                (a, b) => a.timestamp - b.timestamp
+              );
 
-{/*         {quotes.length > 0 ? ( */}
-{/*           quotes.map((quote) => { */}
-{/*             // Сортируем данные по времени */}
-{/*             const sortedData = [...quote.data].sort( */}
-{/*               (a, b) => new Date(a.timestamp) - new Date(b.timestamp) */}
-{/*             ); */}
+              const labels = sortedData.map((point) =>
+                new Date(point.timestamp).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              );
 
-{/*             // Метки времени на оси X */}
-{/*             const labels = sortedData.map((point) => */}
-{/*               new Date(point.timestamp).toLocaleTimeString([], { */}
-{/*                 hour: "2-digit", */}
-{/*                 minute: "2-digit", */}
-{/*               }) */}
-{/*             ); */}
+              const chartData = {
+                labels,
+                datasets: [
+                  {
+                    label: `${symbol} — Closing Price`,
+                    data: sortedData.map((point) => point.close),
+                    borderColor: "rgba(75,192,192,1)",
+                    backgroundColor: "rgba(75,192,192,0.2)",
+                    fill: true,
+                    tension: 0.3,
+                  },
+                ],
+              };
 
-{/*             // Данные цены закрытия */}
-{/*             const data = { */}
-{/*               labels, */}
-{/*               datasets: [ */}
-{/*                 { */}
-{/*                   label: `${quote.symbol} — Цена закрытия`, */}
-{/*                   data: sortedData.map((point) => point.close), */}
-{/*                   borderColor: "rgba(75,192,192,1)", */}
-{/*                   backgroundColor: "rgba(75,192,192,0.2)", */}
-{/*                   fill: true, */}
-{/*                   tension: 0.3, */}
-{/*                 }, */}
-{/*               ], */}
-{/*             }; */}
+              const options = {
+                responsive: true,
+                plugins: {
+                  legend: { position: "top" },
+                  title: {
+                    display: true,
+                    text: `Closing Price Chart: ${symbol}`,
+                  },
+                },
+                scales: {
+                  x: {
+                    display: true,
+                    title: { display: true, text: "Time" },
+                  },
+                  y: {
+                    display: true,
+                    title: { display: true, text: "Price" },
+                  },
+                },
+              };
 
-{/*             const options = { */}
-{/*               responsive: true, */}
-{/*               plugins: { */}
-{/*                 legend: { position: "top" }, */}
-{/*                 title: { display: true, text: `График цены закрытия: ${quote.symbol}` }, */}
-{/*               }, */}
-{/*               scales: { */}
-{/*                 x: { */}
-{/*                   display: true, */}
-{/*                   title: { display: true, text: "Время" }, */}
-{/*                 }, */}
-{/*                 y: { */}
-{/*                   display: true, */}
-{/*                   title: { display: true, text: "Цена" }, */}
-{/*                 }, */}
-{/*               }, */}
-{/*             }; */}
-
-{/*             return ( */}
-{/*               <div key={quote.symbol} className="mb-8 border-b pb-4"> */}
-{/*                 <Line options={options} data={data} /> */}
-{/*               </div> */}
-{/*             ); */}
-{/*           }) */}
-{/*         ) : ( */}
-{/*           <div className="text-center">Нет доступных котировок</div> */}
-{/*         )} */}
-{/*       </div> */}
+              return (
+                <div key={symbol} className="chart-wrapper">
+                  <Line data={chartData} options={options} />
+                </div>
+              );
+            })
+          ) : (
+            <div>No quotes available</div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
